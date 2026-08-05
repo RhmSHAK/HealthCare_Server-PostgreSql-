@@ -10,7 +10,7 @@ const pick = <T extends Record<string,unknown> ,K extends keyof T > (obj: T, key
 
     }
 
-    console.log(finalObj)
+    //console.log(finalObj)
     return finalObj;
 }
 

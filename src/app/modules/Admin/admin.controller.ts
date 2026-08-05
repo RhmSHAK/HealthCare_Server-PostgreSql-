@@ -3,16 +3,19 @@ import  { Request, Response }  from "express";
 
 import { AdminService } from "./admin.service";
 import pick from "../../../share/pick";
+import { adminFilterableFields } from "./admin.constant";
 
 
 
 const getAllAdminDB = async (req: Request , res: Response) => {
    
     try{
-        console.log(req.query);   
+        //console.log(req.query);   
 
-    const filters = pick(req.query, ["searchTerm", "name", "email", "role"]);  
-    const result = await AdminService.getAllAdminDB(filters);
+    const filters = pick(req.query, adminFilterableFields);
+    const paginationOptions = pick(req.query, ["page", "limit", "sortBy", "sortOrder"]);  
+    console.log(paginationOptions)
+    const result = await AdminService.getAllAdminDB(filters, paginationOptions);
     // console.log(result)
 
     res.status(200).json({
